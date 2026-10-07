@@ -311,14 +311,14 @@ class VacuumEnvironment:
     
     def execute(self, action: Action) -> None:
         """Applies the agent's action to the world."""
-        self.steps += 1                         # count this step
+        self.steps += 1                         
         self.bumped = False
         x, y = self.pos
 
         if action.move == "Suck":
-            self.dirty.discard(self.pos)             # remove the current cell
+            self.dirty.discard(self.pos)            
         elif action.move == "NoOp":
-            pass                                # do nothing
+            pass                             
         else:
             if action.move == "Up":
                 new_pos = (x, y - 1)
@@ -326,14 +326,14 @@ class VacuumEnvironment:
                 new_pos = (x, y + 1)
             elif action.move == "Left":
                 new_pos = (x - 1, y)
-            else:                               # "Right"
+            else:                               
                 new_pos = (x + 1, y)
 
             nx, ny = new_pos
-            if (0 <= nx < self.size) and (0 <= ny < self.size):                             # is new_pos inside the grid?
+            if (0 <= nx < self.size) and (0 <= ny < self.size):                            
                 self.pos = (nx, ny)
             else:
-                self.bumped = True              # hit a wall, stay put
+                self.bumped = True         
 
     def is_clean(self) -> bool:
         return len(self.dirty) == 0
